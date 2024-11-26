@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.4.4/luxon.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <section class="date-section">
+            <div class="date-display">
+                <div class="current-time" id="currentTime"></div>
+                <div class="current-date" id="currentDate"></div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const DateTime = luxon.DateTime;
+
+        function init() {
+            updateDateDisplay();
+            setInterval(updateDateDisplay, 1000);
+        }
+
+        function updateDateDisplay() {
+            const now = DateTime.local();
+            
+            document.getElementById('currentTime').textContent = 
+                now.toLocaleString(DateTime.TIME_WITH_SECONDS);
+            
+            document.getElementById('currentDate').textContent = 
+                now.toLocaleString({ 
+                    weekday: 'long',
+                    month: 'long', 
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+        }
+
+        init();
+    </script>
+</body>
+</html>

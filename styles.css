@@ -1,0 +1,50 @@
+:root {
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --border-color: #e0e0e0;
+    --highlight-color: #4a90e2;
+    --secondary-bg: #f5f5f5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.date-section {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-color);
+}
+
+.date-display {
+    text-align: center;
+}
+
+.current-time {
+    font-size: 4rem;
+    font-weight: 300;
+    margin-bottom: 10px;
+}
+
+.current-date {
+    font-size: 2rem;
+    color: var(--highlight-color);
+}
