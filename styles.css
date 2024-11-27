@@ -25,7 +25,7 @@ body {
 }
 
 .date-section {
-    flex: 1;
+    flex: 2;
     padding: 40px;
     display: flex;
     flex-direction: column;
@@ -47,4 +47,75 @@ body {
 .current-date {
     font-size: 2rem;
     color: var(--highlight-color);
+}
+
+.todo-section {
+    flex: 1;
+    padding: 20px;
+    background-color: var(--secondary-bg);
+}
+
+.todo-input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.todo-input input {
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.todo-input button {
+    padding: 8px 16px;
+    background-color: var(--highlight-color);
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+}
+
+.todo-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background-color: var(--bg-color);
+    border-radius: 4px;
+}
+
+.todo-item input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.todo-item.completed {
+    opacity: 0.7;
+    text-decoration: line-through;
+}
+
+.todo-actions {
+    margin-left: auto;
+    display: flex;
+    gap: 5px;
+}
+
+.todo-actions button {
+    padding: 4px 8px;
+    background-color: var(--highlight-color);
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+}
+
+h2 {
+    margin-bottom: 20px;
 }
