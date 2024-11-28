@@ -16,11 +16,7 @@ To-Do List: Users can utilize this feature to stay on track and use it to keep r
 
 Task sorting: Users can use this feature to sort the tasks in their To-Do List, whether it be by their points, date, etc.
 
-Toggle Theme: Users can choose between a dark and light theme using a toggle button depending on their preference. 
-
-Tentative Features:
-
-Notes and Reminders: Users can add, edit, and delete “sticky notes” that can be placed on specific dates pages or kept throughout the dates. Users can add important information that needs to be tracked through multiple days.
+Toggle Theme: Users can choose between a dark and light theme using a toggle button depending on their preference.
 
 
 Target User Group and Context:
