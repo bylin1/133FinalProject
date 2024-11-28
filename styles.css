@@ -4,12 +4,21 @@
     --border-color: #e0e0e0;
     --highlight-color: #4a90e2;
     --secondary-bg: #f5f5f5;
+
+    /* Dark theme colors */
+    --bg-color-dark: #121212;
+    --text-color-dark: #e0e0e0;
+    --border-color-dark: #333333;
+    --highlight-color-dark: #bb86fc;
+    --secondary-bg-dark: #1e1e1e;
 }
+
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    user-select: none;
 }
 
 body {
@@ -50,6 +59,7 @@ body {
 }
 
 .todo-section {
+    position:relative;
     flex: 1;
     padding: 20px;
     background-color: var(--secondary-bg);
@@ -114,6 +124,15 @@ body {
     border-radius: 4px;
     color: white;
     cursor: pointer;
+}
+
+#toggleTheme{
+    position:absolute;
+    bottom: 0;
+    right: 0;
+    margin:10px;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 h2 {
