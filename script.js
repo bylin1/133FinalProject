@@ -7,7 +7,6 @@ let calendarEvents = {};
 function init() {
     updateDateDisplay();
     loadTodos();
-    getQuote();
     setInterval(updateDateDisplay, 1000);
 
     const calendarEl = document.getElementById('calendar');
@@ -17,6 +16,7 @@ function init() {
     });
     calendar.render();
 }
+
 
 // Create the events array for FullCalendar
 function getCalendarEventsArray() {
@@ -193,16 +193,16 @@ toggleThemeButton.addEventListener('click', () => {
     }
 });
 
-// Daily Quote
 async function getQuote() {
     const quoteText = document.getElementById('quoteText');
     const quoteAuthor = document.getElementById('quoteAuthor');
-    const refreshButton = document.getElementById('refreshQuote');
-    if (refreshButton) {
-        refreshButton.disabled = true;
-    }
+    if (!quoteText || !quoteAuthor) return;
+
     try {
-        const response = await fetch('https://api.quotable.io/random');
+        const response = await fetch('');
+        if (!response.ok) { 
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const data = await response.json();
         quoteText.textContent = `"${data.content}"`;
         quoteAuthor.textContent = `— ${data.author}`;
@@ -210,11 +210,10 @@ async function getQuote() {
         console.error('Error fetching quote:', error);
         quoteText.textContent = 'Failed to load quote';
         quoteAuthor.textContent = '';
-    } finally {
-        if (refreshButton) {
-            refreshButton.disabled = false;
-        }
     }
 }
 
-init();
+document.addEventListener('DOMContentLoaded', () => {
+    init(); // Call init() after the DOM is ready
+    getQuote(); // Call getQuote() after the DOM is ready
+}); 
