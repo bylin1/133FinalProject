@@ -1,9 +1,9 @@
 const DateTime = luxon.DateTime;
 let todos = [];
 let calendar;
-let calendarEvents = {}; // Dictionary to store calendar events {date: [events]}
+let calendarEvents = {};
 
-// Initialize Website
+// Initializer
 function init() {
     updateDateDisplay();
     loadTodos();
@@ -12,12 +12,12 @@ function init() {
     const calendarEl = document.getElementById('calendar');
     calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
-        events: getCalendarEventsArray(), // Use the array version for FullCalendar
+        events: getCalendarEventsArray(), 
     });
     calendar.render();
 }
 
-// Function to create the events array for FullCalendar
+// Create the events array for FullCalendar
 function getCalendarEventsArray() {
     const eventsArray = [];
     for (const date in calendarEvents) {
@@ -29,7 +29,7 @@ function getCalendarEventsArray() {
 }
 
 function updateCalendarEvents() {
-    calendarEvents = {}; // Clear existing events
+    calendarEvents = {}; 
 
     todos.forEach(todo => {
         if (todo.date) {
