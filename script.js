@@ -1,12 +1,51 @@
 const DateTime = luxon.DateTime;
 let todos = [];
+let calendar;
+let calendarEvents = {}; // Dictionary to store calendar events {date: [events]}
 
 // Initialize Website
 function init() {
     updateDateDisplay();
     loadTodos();
     setInterval(updateDateDisplay, 1000);
+
+    const calendarEl = document.getElementById('calendar');
+    calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        events: getCalendarEventsArray(), // Use the array version for FullCalendar
+    });
+    calendar.render();
 }
+
+// Function to create the events array for FullCalendar
+function getCalendarEventsArray() {
+    const eventsArray = [];
+    for (const date in calendarEvents) {
+        calendarEvents[date].forEach(event => {
+            eventsArray.push({ title: event.text, start: date });
+        });
+    }
+    return eventsArray;
+}
+
+function updateCalendarEvents() {
+    calendarEvents = {}; // Clear existing events
+
+    todos.forEach(todo => {
+        if (todo.date) {
+            if (!calendarEvents[todo.date]) {
+                calendarEvents[todo.date] = [];
+            }
+            // Check if the event already exists for this date
+            const existingEventIndex = calendarEvents[todo.date].findIndex(event => event.id === todo.id);
+
+            if (existingEventIndex === -1) { // If event doesn't exist, add it
+                calendarEvents[todo.date].push({ text: todo.text, id: todo.id });
+            }
+        }
+    });
+}
+
 
 // Update date display
 function updateDateDisplay() {
@@ -39,6 +78,10 @@ function addTodo() {
     todos.push(todo);
     saveTodos();
     reloadTodos();
+    updateCalendarEvents(); // Update the events dictionary
+    calendar.setOption('events', getCalendarEventsArray()); // Set events using the array
+    input.value = "";
+    dateInput.value = "";
 }
 
 
@@ -55,6 +98,8 @@ function deleteTodo(id) {
     todos = todos.filter(t => t.id !== id);
     saveTodos();
     reloadTodos();
+    updateCalendarEvents();
+    calendar.setOption('events', getCalendarEventsArray());
 }
 
 function reloadTodos() {
@@ -97,11 +142,12 @@ function saveTodos() {
     localStorage.setItem('todos', JSON.stringify(todos));
 }
 
+
 function loadTodos() {
     const stored = localStorage.getItem('todos');
     if (stored) {
         todos = JSON.parse(stored);
-        reloadTodos();
+        updateCalendarEvents(); // Initialize calendarEvents when loading
     }
 }
 

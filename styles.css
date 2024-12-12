@@ -152,11 +152,12 @@ body {
     margin-bottom:5px;
 }
 
-/* In your styles.css */
-.fc-calendar {
-    /* Remove any existing height rules for this class */
-    height: auto !important; 
-}
+
+
+#calendar {
+    max-width: 900px; /* Adjust width as needed */
+    margin: 0 auto; 
+  }
 
 h2 {
     margin-bottom: 20px;
