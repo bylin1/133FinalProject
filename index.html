@@ -6,19 +6,22 @@
     <title>Todo App</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.4.4/luxon.min.js"></script>
-    <script src="script.js" defer></script> <!-- Link to external script -->
+    <script src="script.js" defer></script> 
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/main.min.css' rel='stylesheet' />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/main.min.js'></script>
 </head>
 <body>
     <div class="container">
         <section class="date-section">
             <div class="date-display">
-                <div class="current-time" id="currentTime"></div>
                 <div class="current-date" id="currentDate"></div>
+                <div class="current-time" id="currentTime"></div>
+                <div id="calendar" class="fc-calendar"></div>
             </div>
         </section>
-        
+
         <section class="todo-section">
-            <h2>To-Do List</h2>
+            <h2 class="toDoTitle">To-Do List</h2>
             <div class="todo-input">
                 <input type="text" id="todoInput" placeholder="Add a new task...">
                 <input type="date" id="todoDate">
@@ -28,5 +31,31 @@
             <button id="toggleTheme">Toggle theme</button>
         </section>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const calendarEl = document.getElementById('calendar');
+            if (!calendarEl) {
+                console.error("Calendar element not found!");
+                return; // Exit if the element isn't there
+            }
+
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                weekends: true,
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                },
+                events: [
+                    { title: 'Event 1', date: '2024-11-12' },
+                    { title: 'Event 2', date: '2024-11-15' }
+                ],
+                height: '500px' // Adjust height as needed
+            });
+            calendar.render();
+        });
+    </script>
 </body>
 </html>

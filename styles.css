@@ -34,14 +34,22 @@ body {
 }
 
 .date-section {
-    flex: 2;
-    padding: 40px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--bg-color);
+    align-items: stretch;
+    flex: 2;
+    padding: 20px;
+    background-color: var(--secondary-bg); /* Use the variable here */
 }
+
+
+.todo-section {
+    position: relative;
+    flex: 1; /* Takes up the remaining 1/3 of the space */
+    padding: 20px;
+    background-color: var(--secondary-bg);
+}
+
 
 .date-display {
     text-align: center;
@@ -58,12 +66,7 @@ body {
     color: var(--highlight-color);
 }
 
-.todo-section {
-    position:relative;
-    flex: 1;
-    padding: 20px;
-    background-color: var(--secondary-bg);
-}
+
 
 .todo-input {
     display: flex;
@@ -112,11 +115,16 @@ body {
     text-decoration: line-through;
 }
 
+.toDoTitle{
+    margin-top:10px;
+}
+
 .todo-actions {
     margin-left: auto;
     display: flex;
     gap: 5px;
 }
+
 
 .todo-actions button {
     padding: 4px 8px;
@@ -133,6 +141,21 @@ body {
     margin:10px;
     padding: 10px;
     border-radius: 5px;
+}
+.current-time{
+    font-size:15px
+}
+
+.current-date{
+    font-size:18px;
+    margin-top:10px;
+    margin-bottom:5px;
+}
+
+/* In your styles.css */
+.fc-calendar {
+    /* Remove any existing height rules for this class */
+    height: auto !important; 
 }
 
 h2 {

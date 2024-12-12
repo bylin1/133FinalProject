@@ -41,6 +41,7 @@ function addTodo() {
     reloadTodos();
 }
 
+
 function toggleTodo(id) {
     const todo = todos.find(t => t.id === id);
     if (todo) {
