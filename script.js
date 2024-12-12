@@ -7,6 +7,7 @@ let calendarEvents = {};
 function init() {
     updateDateDisplay();
     loadTodos();
+    getQuote();
     setInterval(updateDateDisplay, 1000);
 
     const calendarEl = document.getElementById('calendar');
@@ -102,6 +103,18 @@ function deleteTodo(id) {
     calendar.setOption('events', getCalendarEventsArray());
 }
 
+function editTodo(id) {
+    const todo = todos.find(t => t.id === id);
+    if (todo) {
+        const newText = prompt('Edit task:', todo.text);
+        if (newText !== null) {
+            todo.text = newText;
+            saveTodos();
+            reloadTodos();
+        }
+    }
+}
+
 function reloadTodos() {
     const todoList = document.getElementById('todoList');
     todoList.innerHTML = '';
@@ -125,10 +138,16 @@ function reloadTodos() {
         const actions = document.createElement('div');
         actions.className = 'todo-actions';
 
+        const editButton = document.createElement('button');
+        editButton.textContent = 'Edit';
+        editButton.onclick = () => editTodo(todo.id);
+
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Delete';
         deleteButton.onclick = () => deleteTodo(todo.id);
 
+        
+        actions.appendChild(editButton);
         actions.appendChild(deleteButton);
 
         todoItem.appendChild(checkbox);
@@ -173,5 +192,29 @@ toggleThemeButton.addEventListener('click', () => {
         toggleThemeButton.textContent = 'Dark Mode';
     }
 });
+
+// Daily Quote
+async function getQuote() {
+    const quoteText = document.getElementById('quoteText');
+    const quoteAuthor = document.getElementById('quoteAuthor');
+    const refreshButton = document.getElementById('refreshQuote');
+    if (refreshButton) {
+        refreshButton.disabled = true;
+    }
+    try {
+        const response = await fetch('https://api.quotable.io/random');
+        const data = await response.json();
+        quoteText.textContent = `"${data.content}"`;
+        quoteAuthor.textContent = `— ${data.author}`;
+    } catch (error) {
+        console.error('Error fetching quote:', error);
+        quoteText.textContent = 'Failed to load quote';
+        quoteAuthor.textContent = '';
+    } finally {
+        if (refreshButton) {
+            refreshButton.disabled = false;
+        }
+    }
+}
 
 init();
