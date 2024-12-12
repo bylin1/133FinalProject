@@ -199,7 +199,7 @@ async function getQuote() {
     if (!quoteText || !quoteAuthor) return;
 
     try {
-        const response = await fetch('');
+        const response = await fetch('https://api.quotable.io/random');
         if (!response.ok) { 
             throw new Error(`HTTP error! status: ${response.status}`);
         }
